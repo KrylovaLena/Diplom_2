@@ -55,7 +55,8 @@ def create_orders(registered_user_access_token, ingredients):
 
     for _ in range(5):
         response = requests.post(request_url, json=payload, headers=headers)
-        assert response.status_code == 200
+        if response.status_code != 200:
+            raise Exception("Неверный статус код ответа")
 
     return {
         "access_token": access_token

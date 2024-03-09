@@ -21,6 +21,8 @@ class TestCreateOrder:
             response = requests.post(request_url, data=payload, headers=headers)
         with allure.step("Шаг 2: Проверка кода ответа"):
             assert response.status_code == 200, "Ошибка: Неверный код ответа"
+        with allure.step("Шаг 3: Проверка сообщения об успешном создании заказа"):
+            assert '"success":true' in response.text, "Ошибка: Неверное сообщение об успешном создании заказа"
 
     @allure.title("Создание заказа не авторизованным пользователем")
     @allure.description("Тест проверяет успешное создание заказа не авторизованным пользователем с валидным хеш ингредиента")
